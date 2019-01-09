@@ -1,6 +1,5 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.template import loader
 
 from .models import TrainingCycle, TrainingCycleConfig
 
@@ -24,9 +23,5 @@ def training_cycle_edit(request, training_cycle_id):
 
 def training_cycle_list(request):
     training_cycles = TrainingCycle.objects.all()
-    
-    template = loader.get_template('pstd/list.html')
-    context = {
-        'training_cycles': training_cycles
-    }
-    return HttpResponse(template.render(context, request))
+    context = {'training_cycles': training_cycles}
+    return render(request, 'pstd/list.html', context)
