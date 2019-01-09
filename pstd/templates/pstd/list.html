@@ -1,0 +1,17 @@
+{% if training_cycles %}
+    <ul>
+    {% for training_cycle in training_cycles %}
+        <li>
+            {{ training_cycle.name }}
+            <a href="/pstd/{{ training_cycle.id }}/query/">
+                Train
+            </a>
+            <a href="/pstd/{{ training_cycle.id }}/edit/">
+                Edit
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No training cycles have been created.</p>
+{% endif %}
