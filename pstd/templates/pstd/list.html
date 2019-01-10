@@ -1,18 +1,22 @@
-<a href="{% url 'new' %}">Create new training cycle</a>
-{% if training_cycles %}
-    <ul>
-    {% for training_cycle in training_cycles %}
-        <li>
-            {{ training_cycle.name }}
-            <a href="{% url 'session' training_cycle.id %}">
-                Train
-            </a>
-            <a href="{% url 'edit' training_cycle.id %}">
-                Edit
-            </a>
-        </li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No training cycles have been created.</p>
-{% endif %}
+{% extends 'base.html' %}
+
+{% block content %}
+    <a href="{% url 'new' %}">Create new training cycle</a>
+    {% if training_cycles %}
+        <ul>
+        {% for training_cycle in training_cycles %}
+            <li>
+                {{ training_cycle.name }}
+                <a href="{% url 'session' training_cycle.id %}">
+                    Train
+                </a>
+                <a href="{% url 'edit' training_cycle.id %}">
+                    Edit
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No training cycles have been created.</p>
+    {% endif %}
+{% endblock %}

@@ -1,106 +1,110 @@
-<h1>Configure {% if new_cycle %}new{% endif %} training cycle</h1>
+{% extends 'base.html' %}
 
-<form action="
-{% if training_cycle %}
-    {% url 'edit' training_cycle.id %}
-{% else %}
-    {% url 'new' %}
-{% endif %}
-" method="post">
-{% csrf_token %}
-    <label for="training_cycle_name">Training Cycle Name</label>
-    <input type="text"
-           name="training_cycle_name"
-           id="training_cycle_name"
-           {% if training_cycle %}value="{{ training_cycle.name }}"{% endif %}><br>
-    
-    <h3>Small Load</h3>
+{% block content %}
+    <h1>Configure {% if new_cycle %}new{% endif %} training cycle</h1>
 
-    <label for="reps_per_set_small">Reps per Set</label>
-    <input type="number"
-           name="reps_per_set_small"
-           id="reps_per_set_small"
-           min="1"
-           {% if training_cycle %}value="{{ training_cycle.config.reps_per_set_small }}"{% endif %}><br>
-    
-    <label for="inol_target_small">INOL Target</label>
-    <input type="number"
-           name="inol_target_small"
-           id="inol_target_small"
-           min="0"
-           step="0.01"
-           {% if training_cycle %}value="{{ training_cycle.config.inol_target_small }}"{% endif %}><br>
-
-    <label for="intensity_target_small">Intensity Target (% of 1.0)</label>
-    <input type="number"
-           name="intensity_target_small"
-           id="intensity_target_small"
-           min="0"
-           max="1"
-           step="0.01"
-           {% if training_cycle %}value="{{ training_cycle.config.intensity_target_small }}"{% endif %}><br>
-
-    <h3>Medium Load</h3>
-
-    <label for="reps_per_set_medium">Reps per Set</label>
-    <input type="number"
-           name="reps_per_set_medium"
-           id="reps_per_set_medium"
-           min="1"
-           {% if training_cycle %}value="{{ training_cycle.config.reps_per_set_medium }}"{% endif %}><br>
-    
-    <label for="inol_target_medium">INOL Target</label>
-    <input type="number"
-           name="inol_target_medium"
-           id="inol_target_medium"
-           min="0"
-           step="0.01"
-           {% if training_cycle %}value="{{ training_cycle.config.inol_target_medium }}"{% endif %}><br>
-
-    <label for="intensity_target_medium">Intensity Target (% of 1.0)</label>
-    <input type="number"
-           name="intensity_target_medium"
-           id="intensity_target_medium"
-           min="0"
-           max="1"
-           step="0.01"
-           {% if training_cycle %}value="{{ training_cycle.config.intensity_target_medium }}"{% endif %}><br>
-    
-    <h3>Large Load</h3>
-
-    <label for="reps_per_set_large">Reps per Set</label>
-    <input type="number"
-           name="reps_per_set_large"
-           id="reps_per_set_large"
-           min="1"
-           {% if training_cycle %}value="{{ training_cycle.config.reps_per_set_large }}"{% endif %}><br>
-    
-    <label for="inol_target_large">INOL Target</label>
-    <input type="number"
-           name="inol_target_large"
-           id="inol_target_large"
-           min="0"
-           step="0.01"
-           {% if training_cycle %}value="{{ training_cycle.config.inol_target_large }}"{% endif %}><br>
-
-    <label for="intensity_target_large">Intensity Target (% of 1.0)</label>
-    <input type="number"
-           name="intensity_target_large"
-           id="intensity_target_large"
-           min="0"
-           max="1"
-           step="0.01"
-           {% if training_cycle %}value="{{ training_cycle.config.intensity_target_large }}"{% endif %}><br>
+    <form action="
+    {% if training_cycle %}
+        {% url 'edit' training_cycle.id %}
+    {% else %}
+        {% url 'new' %}
+    {% endif %}
+    " method="post">
+    {% csrf_token %}
+        <label for="training_cycle_name">Training Cycle Name</label>
+        <input type="text"
+            name="training_cycle_name"
+            id="training_cycle_name"
+            {% if training_cycle %}value="{{ training_cycle.name }}"{% endif %}><br>
         
-    <label for="supramaximal_inol_increment">Supramaximal INOL Increment</label>
-    <input type="number"
-           name="supramaximal_inol_increment"
-           id="supramaximal_inol_increment"
-           min="0"
-           step="0.01"
-           {% if training_cycle %}value="{{ training_cycle.config.supramaximal_inol_increment }}"{% endif %}><br>
-    
-    <input type="submit" value="Save training cycle">
-</form>
+        <h3>Small Load</h3>
 
-{% if training_cycle %}<a href="{% url 'delete' training_cycle.id %}">Delete this training cycle</a>{% endif %}
+        <label for="reps_per_set_small">Reps per Set</label>
+        <input type="number"
+            name="reps_per_set_small"
+            id="reps_per_set_small"
+            min="1"
+            {% if training_cycle %}value="{{ training_cycle.config.reps_per_set_small }}"{% endif %}><br>
+        
+        <label for="inol_target_small">INOL Target</label>
+        <input type="number"
+            name="inol_target_small"
+            id="inol_target_small"
+            min="0"
+            step="0.01"
+            {% if training_cycle %}value="{{ training_cycle.config.inol_target_small }}"{% endif %}><br>
+
+        <label for="intensity_target_small">Intensity Target (% of 1.0)</label>
+        <input type="number"
+            name="intensity_target_small"
+            id="intensity_target_small"
+            min="0"
+            max="1"
+            step="0.01"
+            {% if training_cycle %}value="{{ training_cycle.config.intensity_target_small }}"{% endif %}><br>
+
+        <h3>Medium Load</h3>
+
+        <label for="reps_per_set_medium">Reps per Set</label>
+        <input type="number"
+            name="reps_per_set_medium"
+            id="reps_per_set_medium"
+            min="1"
+            {% if training_cycle %}value="{{ training_cycle.config.reps_per_set_medium }}"{% endif %}><br>
+        
+        <label for="inol_target_medium">INOL Target</label>
+        <input type="number"
+            name="inol_target_medium"
+            id="inol_target_medium"
+            min="0"
+            step="0.01"
+            {% if training_cycle %}value="{{ training_cycle.config.inol_target_medium }}"{% endif %}><br>
+
+        <label for="intensity_target_medium">Intensity Target (% of 1.0)</label>
+        <input type="number"
+            name="intensity_target_medium"
+            id="intensity_target_medium"
+            min="0"
+            max="1"
+            step="0.01"
+            {% if training_cycle %}value="{{ training_cycle.config.intensity_target_medium }}"{% endif %}><br>
+        
+        <h3>Large Load</h3>
+
+        <label for="reps_per_set_large">Reps per Set</label>
+        <input type="number"
+            name="reps_per_set_large"
+            id="reps_per_set_large"
+            min="1"
+            {% if training_cycle %}value="{{ training_cycle.config.reps_per_set_large }}"{% endif %}><br>
+        
+        <label for="inol_target_large">INOL Target</label>
+        <input type="number"
+            name="inol_target_large"
+            id="inol_target_large"
+            min="0"
+            step="0.01"
+            {% if training_cycle %}value="{{ training_cycle.config.inol_target_large }}"{% endif %}><br>
+
+        <label for="intensity_target_large">Intensity Target (% of 1.0)</label>
+        <input type="number"
+            name="intensity_target_large"
+            id="intensity_target_large"
+            min="0"
+            max="1"
+            step="0.01"
+            {% if training_cycle %}value="{{ training_cycle.config.intensity_target_large }}"{% endif %}><br>
+            
+        <label for="supramaximal_inol_increment">Supramaximal INOL Increment</label>
+        <input type="number"
+            name="supramaximal_inol_increment"
+            id="supramaximal_inol_increment"
+            min="0"
+            step="0.01"
+            {% if training_cycle %}value="{{ training_cycle.config.supramaximal_inol_increment }}"{% endif %}><br>
+        
+        <input type="submit" value="Save training cycle">
+    </form>
+
+    {% if training_cycle %}<a href="{% url 'delete' training_cycle.id %}">Delete this training cycle</a>{% endif %}
+{% endblock %}

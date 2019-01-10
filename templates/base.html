@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}PA Toolkit{% endblock %}</title>
+</head>
+<body>
+    <header>
+        {% if user.is_authenticated %}
+            <a href="/pstd/">Home</a>
+            |
+            Logged in as {{ user.username }}
+            |
+            <a href="/logout/?next=/pstd/">Log Out</a>
+        {% else %}
+            <a href="{% url 'social:begin' 'google-oauth2' %}">Log In</a>
+        {% endif %}
+    </header>
+    <hr>
+    {% if user.is_authenticated %}
+    <main>
+
+        {% block content %}
+        {% endblock %}
+    </main>
+    {% endif %}
+</body>
+</html>
