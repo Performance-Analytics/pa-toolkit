@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class TrainingCycleConfig(models.Model):
     reps_per_set_small = models.PositiveSmallIntegerField()
@@ -18,5 +19,6 @@ class TrainingCycleConfig(models.Model):
 
 class TrainingCycle(models.Model):
     config = models.ForeignKey(TrainingCycleConfig, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     previous_training_max = models.FloatField(default=0)
     name = models.CharField(max_length=256, default="default")

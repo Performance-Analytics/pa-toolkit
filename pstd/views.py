@@ -35,6 +35,7 @@ def training_cycle_edit(request, training_cycle_id):
         training_cycle = TrainingCycle.objects.get(pk=training_cycle_id)
 
         training_cycle.name = training_cycle_name
+        training_cycle.user = request.user
 
         config = training_cycle.config
 
@@ -70,6 +71,7 @@ def training_cycle_new(request):
         training_cycle = TrainingCycle()
 
         training_cycle.name = training_cycle_name
+        training_cycle.user = request.user
 
         config = TrainingCycleConfig()
 
@@ -101,6 +103,6 @@ def training_cycle_new(request):
         return render(request, 'pstd/edit.html')
 
 def training_cycle_list(request):
-    training_cycles = TrainingCycle.objects.all()
+    training_cycles = TrainingCycle.objects.filter(user=request.user.pk)
     context = {'training_cycles': training_cycles}
     return render(request, 'pstd/list.html', context)
