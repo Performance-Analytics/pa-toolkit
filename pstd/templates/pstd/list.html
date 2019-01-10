@@ -1,12 +1,13 @@
+<a href="{% url 'new' %}">Create new training cycle</a>
 {% if training_cycles %}
     <ul>
     {% for training_cycle in training_cycles %}
         <li>
             {{ training_cycle.name }}
-            <a href="/pstd/{{ training_cycle.id }}/query/">
+            <a href="{% url 'query' training_cycle.id %}">
                 Train
             </a>
-            <a href="/pstd/{{ training_cycle.id }}/edit/">
+            <a href="{% url 'edit' training_cycle.id %}">
                 Edit
             </a>
         </li>
