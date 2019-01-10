@@ -8,9 +8,12 @@
 <h3>Training cycle
     <span style="font-style:italic;">{{ training_cycle.name }}</span>
 </h3>
-{% if result %}
-    Fatigue Rating: {{ fatigue_rating }}<br>
-    Training Max: {{ training_max }}
+{% if session %}
+    Training Max:
+        {{ session.training_max }}<br>
+    Workload:
+        {{ session.sets }}x{{ session.reps_per_set }}{% if session.extra_reps != 0 %}, {{ session.extra_reps }}{% endif %}
+        @ {{ session.load | floatformat:2 }}
 {% else %}
 <form action="{% url 'session' training_cycle.id %}" method="POST">
 {% csrf_token %}

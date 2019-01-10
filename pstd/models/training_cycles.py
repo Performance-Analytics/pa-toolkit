@@ -1,7 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
 class TrainingCycleConfig(models.Model):
     reps_per_set_small = models.PositiveSmallIntegerField()
     reps_per_set_medium = models.PositiveSmallIntegerField()

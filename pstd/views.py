@@ -2,7 +2,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from .models import TrainingCycle, TrainingCycleConfig
+from .models.training_cycles import TrainingCycle, TrainingCycleConfig
+
+from .models.training_sessions import SessionGenerator
 
 # Create your views here.
 
@@ -13,9 +15,11 @@ def session(request, training_cycle_id):
     training_cycle = TrainingCycle.objects.get(pk=training_cycle_id)
     context = {'training_cycle': training_cycle}
     if request.method == "POST":
-        context['result'] = True
-        context['fatigue_rating'] = request.POST['fatigue_rating']
-        context['training_max'] = request.POST['training_max']
+        context['session'] = SessionGenerator(
+            training_cycle,
+            request.POST['fatigue_rating'],
+            float(request.POST['training_max'])
+        ).session
 
     return render(request, 'pstd/session.html', context)
 
