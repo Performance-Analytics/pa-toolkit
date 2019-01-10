@@ -3,21 +3,30 @@
 {% block content %}
     <a href="{% url 'new' %}">Create new training cycle</a>
     {% if training_cycles %}
-        <ul>
+        <hr>
         {% for training_cycle in training_cycles %}
-            <li>
-                {{ training_cycle.name }}
-                <a href="{% url 'session' training_cycle.id %}"
-                    class="btn btn-primary">
-                    Train
-                </a>
-                <a href="{% url 'edit' training_cycle.id %}"
-                    class="btn btn-primary">
-                    Edit
-                </a>
-            </li>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle"
+                        type="button"
+                        id="dropdownMenuButton{{ training_cycle.pk }}"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false">
+                    {{ training_cycle.name }}
+                </button>
+                <div class="dropdown-menu"
+                     aria-labelledby="dropdownMenuButton{{ training_cycle.pk }}">
+                    <a href="{% url 'session' training_cycle.id %}"
+                        class="dropdown-item">
+                        Train
+                    </a>
+                    <a href="{% url 'edit' training_cycle.id %}"
+                        class="dropdown-item">
+                        Edit
+                    </a>
+                </div>
+            </div>
         {% endfor %}
-        </ul>
     {% else %}
         <p>No training cycles have been created.</p>
     {% endif %}
