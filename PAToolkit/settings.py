@@ -84,7 +84,6 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
-                'django.template.context_processors.static',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'social_django.context_processors.backends',
@@ -92,12 +91,6 @@ TEMPLATES = [
             ],
         },
     },
-]
-
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static/')
 ]
 
 WSGI_APPLICATION = 'PAToolkit.wsgi.application'
