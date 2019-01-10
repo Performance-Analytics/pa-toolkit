@@ -25,7 +25,7 @@ SECRET_KEY = 'cv5!5fm^gd8cqek&ocoj-iy7e0p+@)qac*4ylfhygc!^w$7#g+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['206.189.187.122.xip.io']
 
 
 # Application definition
