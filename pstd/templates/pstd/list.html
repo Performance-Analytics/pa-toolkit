@@ -5,6 +5,7 @@
     {% if training_cycles %}
         <hr>
         {% for training_cycle in training_cycles %}
+        <br>
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle"
                         type="button"
@@ -20,6 +21,7 @@
                         class="dropdown-item">
                         Train
                     </a>
+                    <div class="dropdown-divider"></div>
                     <a href="{% url 'edit' training_cycle.id %}"
                         class="dropdown-item">
                         Edit
