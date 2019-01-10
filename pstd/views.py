@@ -9,15 +9,15 @@ from .models import TrainingCycle, TrainingCycleConfig
 def index(request):
     return HttpResponse("Hello, world. You're at PSTD index.")
 
-def session_query(request, training_cycle_id):
-    return HttpResponse("Querying for a session in training cycle {}.".format(
-        training_cycle_id
-    ))
+def session(request, training_cycle_id):
+    training_cycle = TrainingCycle.objects.get(pk=training_cycle_id)
+    context = {'training_cycle': training_cycle}
+    if request.method == "POST":
+        context['result'] = True
+        context['fatigue_rating'] = request.POST['fatigue_rating']
+        context['training_max'] = request.POST['training_max']
 
-def session_result(request, training_cycle_id):
-    return HttpResponse("Displaying a session in training cycle {}.".format(
-        training_cycle_id
-    ))
+    return render(request, 'pstd/session.html', context)
 
 def training_cycle_delete(request, training_cycle_id):
     training_cycle = TrainingCycle.objects.get(pk=training_cycle_id)
@@ -27,7 +27,7 @@ def training_cycle_delete(request, training_cycle_id):
 
 def training_cycle_edit(request, training_cycle_id):
     training_cycle_name = request.POST.get('training_cycle_name')
-    if request.method == "POST": # Form handling.
+    if request.method == "POST":
         training_cycle = TrainingCycle.objects.get(pk=training_cycle_id)
 
         training_cycle.name = training_cycle_name
@@ -55,14 +55,14 @@ def training_cycle_edit(request, training_cycle_id):
 
         # Redirect.
         return HttpResponseRedirect(reverse('list'))
-    else: # Form rendering.
+    else:
         training_cycle = TrainingCycle.objects.get(pk=training_cycle_id)
         context = {'training_cycle': training_cycle}
         return render(request, 'pstd/edit.html', context)
 
 def training_cycle_new(request):
     training_cycle_name = request.POST.get('training_cycle_name')
-    if request.method == "POST": # Form handling.
+    if request.method == "POST":
         training_cycle = TrainingCycle()
 
         training_cycle.name = training_cycle_name
@@ -93,7 +93,7 @@ def training_cycle_new(request):
         
         # Redirect.
         return HttpResponseRedirect(reverse('list'))
-    else: # Form rendering.
+    else:
         return render(request, 'pstd/edit.html')
 
 def training_cycle_list(request):

@@ -1,0 +1,47 @@
+<h1>
+{% if result %}
+    Session Prescription
+{% else %}
+    Session Calibration
+{% endif %}
+</h1>
+<h3>Training cycle
+    <span style="font-style:italic;">{{ training_cycle.name }}</span>
+</h3>
+{% if result %}
+    Fatigue Rating: {{ fatigue_rating }}<br>
+    Training Max: {{ training_max }}
+{% else %}
+<form action="{% url 'session' training_cycle.id %}" method="POST">
+{% csrf_token %}
+    <label for="training_max">Training Max @ RPE 8</label>
+    <input type="number"
+           name="training_max"
+           id="training_max"
+           value="{{ training_cycle.previous_training_max }}"><br>
+
+
+    <label for="fatigue_rating">Fatigue Rating</label>
+    
+    <input type="radio"
+           name="fatigue_rating"
+           id="fatigue_rating_low"
+           value="low"
+           checked="checked">
+    <label for="fatigue_rating_low">Low</label>
+
+    <input type="radio"
+           name="fatigue_rating"
+           id="fatigue_rating_medium"
+           value="medium">
+    <label for="fatigue_rating_medium">Medium</label>
+
+    <input type="radio"
+           name="fatigue_rating"
+           id="fatigue_rating_high"
+           value="high">
+    <label for="fatigue_rating_high">High</label>
+
+    <input type="submit" value="Submit">
+</form>
+{% endif %}

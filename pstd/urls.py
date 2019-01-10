@@ -22,12 +22,8 @@ urlpatterns = [
          views.training_cycle_edit,
          name="edit"),
 
-    path('training-cycles/<int:training_cycle_id>/query/',
-         views.session_query,
-         name="query"),
-
-    path('training-cycles/<int:training_cycle_id>/result/',
-         views.session_result,
-         name="result"),
+    path('training-cycles/<int:training_cycle_id>/session/',
+         views.session,
+         name="session"),
 
 ]
