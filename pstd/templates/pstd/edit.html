@@ -2,7 +2,7 @@
 
 {% block content %}
 {% if training_cycle and training_cycle.user == user or not training_cycle %}
-    <h1>Configure {% if training_cycle %}new{% endif %} training cycle</h1>
+    <h1>Configure {% if not training_cycle %}new{% endif %} training cycle</h1>
 
     <form action="
     {% if training_cycle %}
