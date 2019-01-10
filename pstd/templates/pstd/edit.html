@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Configure {% if new_cycle %}new{% endif %} training cycle</h1>
+{% if training_cycle and training_cycle.user == user or not training_cycle %}
+    <h1>Configure {% if training_cycle %}new{% endif %} training cycle</h1>
 
     <form action="
     {% if training_cycle %}
@@ -107,4 +108,5 @@
     </form>
 
     {% if training_cycle %}<a href="{% url 'delete' training_cycle.id %}">Delete this training cycle</a>{% endif %}
+{% endif %}
 {% endblock %}

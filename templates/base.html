@@ -16,14 +16,11 @@
             <a href="{% url 'social:begin' 'google-oauth2' %}">Log In</a>
         {% endif %}
     </header>
-    <hr>
     {% if user.is_authenticated %}
     <main>
-
         {% block content %}
         {% endblock %}
     </main>
-    <hr>
     {% endif %}
     <footer>
         <a href="https://github.com/Performance-Analytics/pa-toolkit">GitHub</a>
