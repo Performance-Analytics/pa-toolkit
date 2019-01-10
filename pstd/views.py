@@ -27,7 +27,7 @@ def training_cycle_delete(request, training_cycle_id):
 
 def training_cycle_edit(request, training_cycle_id):
     training_cycle_name = request.POST.get('training_cycle_name')
-    if training_cycle_name is not None: # Form handling.
+    if request.method == "POST": # Form handling.
         training_cycle = TrainingCycle.objects.get(pk=training_cycle_id)
 
         training_cycle.name = training_cycle_name
@@ -65,7 +65,7 @@ def training_cycle_edit(request, training_cycle_id):
 
 def training_cycle_new(request):
     training_cycle_name = request.POST.get('training_cycle_name')
-    if training_cycle_name is not None: # Form handling.
+    if request.method == "POST": # Form handling.
         training_cycle = TrainingCycle()
 
         training_cycle.name = training_cycle_name
