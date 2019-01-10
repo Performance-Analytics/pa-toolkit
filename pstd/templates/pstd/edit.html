@@ -100,7 +100,7 @@
            step="0.01"
            {% if training_cycle %}value="{{ training_cycle.config.supramaximal_inol_increment }}"{% endif %}><br>
     
-    <input type="submit" value="Create training cycle">
+    <input type="submit" value="Save training cycle">
 </form>
 
 {% if training_cycle %}<a href="{% url 'delete' training_cycle.id %}">Delete this training cycle</a>{% endif %}
