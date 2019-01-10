@@ -7,10 +7,12 @@
         {% for training_cycle in training_cycles %}
             <li>
                 {{ training_cycle.name }}
-                <a href="{% url 'session' training_cycle.id %}">
+                <a href="{% url 'session' training_cycle.id %}"
+                    class="btn btn-primary">
                     Train
                 </a>
-                <a href="{% url 'edit' training_cycle.id %}">
+                <a href="{% url 'edit' training_cycle.id %}"
+                    class="btn btn-primary">
                     Edit
                 </a>
             </li>
