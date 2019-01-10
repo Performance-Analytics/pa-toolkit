@@ -1,10 +1,10 @@
 <h1>Configure {% if new_cycle %}new{% endif %} training cycle</h1>
 
 <form action="
-{% if new_cycle %}
-    {% url 'new' %}
-{% else %}
+{% if training_cycle %}
     {% url 'edit' training_cycle.id %}
+{% else %}
+    {% url 'new' %}
 {% endif %}
 " method="post">
 {% csrf_token %}
@@ -12,7 +12,7 @@
     <input type="text"
            name="training_cycle_name"
            id="training_cycle_name"
-           {% if not new_cycle %}value="{{ training_cycle.name }}"{% endif %}><br>
+           {% if training_cycle %}value="{{ training_cycle.name }}"{% endif %}><br>
     
     <h3>Small Load</h3>
 
@@ -21,7 +21,7 @@
            name="reps_per_set_small"
            id="reps_per_set_small"
            min="1"
-           {% if not new_cycle %}value="{{ training_cycle.config.reps_per_set_small }}"{% endif %}><br>
+           {% if training_cycle %}value="{{ training_cycle.config.reps_per_set_small }}"{% endif %}><br>
     
     <label for="inol_target_small">INOL Target</label>
     <input type="number"
@@ -29,7 +29,7 @@
            id="inol_target_small"
            min="0"
            step="0.01"
-           {% if not new_cycle %}value="{{ training_cycle.config.inol_target_small }}"{% endif %}><br>
+           {% if training_cycle %}value="{{ training_cycle.config.inol_target_small }}"{% endif %}><br>
 
     <label for="intensity_target_small">Intensity Target (% of 1.0)</label>
     <input type="number"
@@ -38,7 +38,7 @@
            min="0"
            max="1"
            step="0.01"
-           {% if not new_cycle %}value="{{ training_cycle.config.intensity_target_small }}"{% endif %}><br>
+           {% if training_cycle %}value="{{ training_cycle.config.intensity_target_small }}"{% endif %}><br>
 
     <h3>Medium Load</h3>
 
@@ -47,7 +47,7 @@
            name="reps_per_set_medium"
            id="reps_per_set_medium"
            min="1"
-           {% if not new_cycle %}value="{{ training_cycle.config.reps_per_set_medium }}"{% endif %}><br>
+           {% if training_cycle %}value="{{ training_cycle.config.reps_per_set_medium }}"{% endif %}><br>
     
     <label for="inol_target_medium">INOL Target</label>
     <input type="number"
@@ -55,7 +55,7 @@
            id="inol_target_medium"
            min="0"
            step="0.01"
-           {% if not new_cycle %}value="{{ training_cycle.config.inol_target_medium }}"{% endif %}><br>
+           {% if training_cycle %}value="{{ training_cycle.config.inol_target_medium }}"{% endif %}><br>
 
     <label for="intensity_target_medium">Intensity Target (% of 1.0)</label>
     <input type="number"
@@ -64,7 +64,7 @@
            min="0"
            max="1"
            step="0.01"
-           {% if not new_cycle %}value="{{ training_cycle.config.intensity_target_medium }}"{% endif %}><br>
+           {% if training_cycle %}value="{{ training_cycle.config.intensity_target_medium }}"{% endif %}><br>
     
     <h3>Large Load</h3>
 
@@ -73,7 +73,7 @@
            name="reps_per_set_large"
            id="reps_per_set_large"
            min="1"
-           {% if not new_cycle %}value="{{ training_cycle.config.reps_per_set_large }}"{% endif %}><br>
+           {% if training_cycle %}value="{{ training_cycle.config.reps_per_set_large }}"{% endif %}><br>
     
     <label for="inol_target_large">INOL Target</label>
     <input type="number"
@@ -81,7 +81,7 @@
            id="inol_target_large"
            min="0"
            step="0.01"
-           {% if not new_cycle %}value="{{ training_cycle.config.inol_target_large }}"{% endif %}><br>
+           {% if training_cycle %}value="{{ training_cycle.config.inol_target_large }}"{% endif %}><br>
 
     <label for="intensity_target_large">Intensity Target (% of 1.0)</label>
     <input type="number"
@@ -90,7 +90,7 @@
            min="0"
            max="1"
            step="0.01"
-           {% if not new_cycle %}value="{{ training_cycle.config.intensity_target_large }}"{% endif %}><br>
+           {% if training_cycle %}value="{{ training_cycle.config.intensity_target_large }}"{% endif %}><br>
         
     <label for="supramaximal_inol_increment">Supramaximal INOL Increment</label>
     <input type="number"
@@ -98,9 +98,9 @@
            id="supramaximal_inol_increment"
            min="0"
            step="0.01"
-           {% if not new_cycle %}value="{{ training_cycle.config.supramaximal_inol_increment }}"{% endif %}><br>
+           {% if training_cycle %}value="{{ training_cycle.config.supramaximal_inol_increment }}"{% endif %}><br>
     
     <input type="submit" value="Create training cycle">
 </form>
 
-{% if not new_cycle %}<a href="{% url 'delete' training_cycle.id %}">Delete this training cycle</a>{% endif %}
+{% if training_cycle %}<a href="{% url 'delete' training_cycle.id %}">Delete this training cycle</a>{% endif %}

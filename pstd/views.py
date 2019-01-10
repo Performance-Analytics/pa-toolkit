@@ -57,10 +57,7 @@ def training_cycle_edit(request, training_cycle_id):
         return HttpResponseRedirect(reverse('list'))
     else: # Form rendering.
         training_cycle = TrainingCycle.objects.get(pk=training_cycle_id)
-        context = {
-            'new_cycle': False,
-            'training_cycle': training_cycle
-        }
+        context = {'training_cycle': training_cycle}
         return render(request, 'pstd/edit.html', context)
 
 def training_cycle_new(request):
@@ -97,8 +94,7 @@ def training_cycle_new(request):
         # Redirect.
         return HttpResponseRedirect(reverse('list'))
     else: # Form rendering.
-        context = {'new_cycle': True}
-        return render(request, 'pstd/edit.html', context)
+        return render(request, 'pstd/edit.html')
 
 def training_cycle_list(request):
     training_cycles = TrainingCycle.objects.all()
