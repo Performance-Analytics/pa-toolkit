@@ -1,30 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <title>{% block title %}PA Toolkit{% endblock %}</title>
-    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-    <header>
+    <div class="container-fluid">
+        <header>
+            {% if user.is_authenticated %}
+                <a href="/pstd/">Home</a>
+                |
+                Logged in as {{ user.username }}
+                |
+                <a href="/logout/?next=/pstd/">Log Out</a>
+            {% else %}
+                <a href="{% url 'social:begin' 'google-oauth2' %}">Log In</a>
+            {% endif %}
+        </header>
         {% if user.is_authenticated %}
-            <a href="/pstd/">Home</a>
-            |
-            Logged in as {{ user.username }}
-            |
-            <a href="/logout/?next=/pstd/">Log Out</a>
-        {% else %}
-            <a href="{% url 'social:begin' 'google-oauth2' %}">Log In</a>
+        <main>
+            <div class="jumbotron">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </main>
         {% endif %}
-    </header>
-    {% if user.is_authenticated %}
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
-    {% endif %}
-    <footer>
-        <a href="https://github.com/Performance-Analytics/pa-toolkit">GitHub</a>
-    </footer>
+        <footer>
+            <a href="https://github.com/Performance-Analytics/pa-toolkit">GitHub</a>
+        </footer>
+    </div>
 </body>
 </html>
