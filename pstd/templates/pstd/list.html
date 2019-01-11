@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <h1>Training Cycles</h1>
+    <hr>
     <a href="{% url 'new' %}">Create new training cycle</a>
+    <hr>
     {% if training_cycles %}
-        <hr>
         {% for training_cycle in training_cycles %}
         <br>
             <div class="dropdown">
