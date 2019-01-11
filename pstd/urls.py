@@ -14,6 +14,10 @@ urlpatterns = [
          views.training_cycle_delete,
          name="delete"),
 
+    path('training-cycles/<int:training_cycle_id>/duplicate/',
+         views.training_cycle_duplicate,
+         name="duplicate"),
+
     path('training-cycles/new/',
          views.training_cycle_new,
          name="new"),

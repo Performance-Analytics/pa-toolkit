@@ -29,6 +29,27 @@ def training_cycle_delete(request, training_cycle_id):
 
     return HttpResponseRedirect(reverse('list'))
 
+def training_cycle_duplicate(request, training_cycle_id):
+    training_cycle = TrainingCycle.objects.get(pk=training_cycle_id)
+
+    old_training_cycle_config_pk = training_cycle.config.pk
+
+    # Duplicate TrainingCycleConfig object. This does not update
+    # the `training_cycle` object whatsoever.
+    training_cycle.config.pk = None
+    training_cycle.config.save()
+    print(training_cycle.config.pk)
+
+    # Duplicate TrainingCycle object.
+    training_cycle.pk = None
+    training_cycle.config = TrainingCycleConfig.objects.get(
+        pk=training_cycle.config.pk
+    )
+    training_cycle.name += ' (copy)'
+    training_cycle.save()
+
+    return HttpResponseRedirect(reverse('list'))
+
 def training_cycle_edit(request, training_cycle_id):
     training_cycle_name = request.POST.get('training_cycle_name')
     if request.method == "POST":
