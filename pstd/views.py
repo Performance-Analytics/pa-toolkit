@@ -55,30 +55,33 @@ def training_cycle_edit(request, training_cycle_id):
     if request.method == "POST":
         training_cycle = TrainingCycle.objects.get(pk=training_cycle_id)
 
-        training_cycle.name = training_cycle_name
-        training_cycle.user = request.user
-        training_cycle.previous_training_max = request.POST["previous_training_max"]
+        # Ensure the training cycle queried is associated with the user making
+        # the query. This is done to prevent users from intentionally tampering
+        # with others' information.
+        if training_cycle.user == request.user:
+            training_cycle.name = training_cycle_name
+            training_cycle.previous_training_max = request.POST["previous_training_max"]
 
-        config = training_cycle.config
+            config = training_cycle.config
 
-        # Construct config model from POST data.
-        config.reps_per_set_small = request.POST["reps_per_set_small"]
-        config.reps_per_set_medium = request.POST["reps_per_set_medium"]
-        config.reps_per_set_large = request.POST["reps_per_set_large"]
+            # Construct config model from POST data.
+            config.reps_per_set_small = request.POST["reps_per_set_small"]
+            config.reps_per_set_medium = request.POST["reps_per_set_medium"]
+            config.reps_per_set_large = request.POST["reps_per_set_large"]
 
-        config.inol_target_small = request.POST["inol_target_small"]
-        config.inol_target_medium = request.POST["inol_target_medium"]
-        config.inol_target_large = request.POST["inol_target_large"]
+            config.inol_target_small = request.POST["inol_target_small"]
+            config.inol_target_medium = request.POST["inol_target_medium"]
+            config.inol_target_large = request.POST["inol_target_large"]
 
-        config.intensity_target_small = request.POST["intensity_target_small"]
-        config.intensity_target_medium = request.POST["intensity_target_medium"]
-        config.intensity_target_large = request.POST["intensity_target_large"]
+            config.intensity_target_small = request.POST["intensity_target_small"]
+            config.intensity_target_medium = request.POST["intensity_target_medium"]
+            config.intensity_target_large = request.POST["intensity_target_large"]
 
-        config.supramaximal_inol_increment = request.POST["supramaximal_inol_increment"]
+            config.supramaximal_inol_increment = request.POST["supramaximal_inol_increment"]
 
-        # Save models into database.
-        config.save()
-        training_cycle.save()
+            # Save models into database.
+            config.save()
+            training_cycle.save()
 
         # Redirect.
         return HttpResponseRedirect(reverse('list'))
