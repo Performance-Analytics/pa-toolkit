@@ -57,6 +57,7 @@ def training_cycle_edit(request, training_cycle_id):
 
         training_cycle.name = training_cycle_name
         training_cycle.user = request.user
+        training_cycle.previous_training_max = request.POST["previous_training_max"]
 
         config = training_cycle.config
 

@@ -61,6 +61,18 @@
                    {% if training_cycle %}value="{{ training_cycle.name }}"{% endif %}>
         </div>
         <hr>
+        {% if training_cycle %}
+        <div class="form-group">
+            <label for="previous_training_max">Previous Training Max @ RPE 8</label>
+            <input type="number"
+                   class="form-control"
+                   name="previous_training_max"
+                   id="previous_training_max"
+                   min="0"
+                   step="any"
+                   value="{{ training_cycle.previous_training_max }}">
+        </div>
+        {% endif %}
         <h3>Small Load</h3>
 
         <div class="form-inline row">
