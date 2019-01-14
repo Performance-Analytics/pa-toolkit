@@ -22,3 +22,7 @@ class TrainingCycle(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     previous_training_max = models.FloatField(default=0)
     name = models.CharField(max_length=256, default="default")
+
+class PresetTrainingCycle(models.Model):
+    config = models.ForeignKey(TrainingCycleConfig, on_delete=models.CASCADE)
+    name = models.CharField(max_length=256, default="default")

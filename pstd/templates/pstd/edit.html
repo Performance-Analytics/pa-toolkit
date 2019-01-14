@@ -4,6 +4,46 @@
 {% if training_cycle and training_cycle.user == user or not training_cycle %}
     <h1>Configure {% if not training_cycle %}new{% endif %} training cycle</h1>
     <hr>
+    {# Preset training cycle selector #}
+    {% if not training_cycle %}
+    <div class="form-group">
+        <script>
+            function fillWithPresetValues(preset) {
+                for (var field in preset) {
+                    document.getElementById(field).value = preset[field];
+                }
+            }
+        </script>
+        <label for="training_cycle_preset">Preset (optional)</label>
+        <select class="form-control"
+                name="training_cycle_preset"
+                onchange="fillWithPresetValues(JSON.parse(value)); value='';">
+            <option hidden disabled selected value>--</option>
+            {% for preset_training_cycle in preset_training_cycles %}
+            <option value='{
+                "training_cycle_name": "{{ preset_training_cycle.name }}",
+
+                "reps_per_set_small": {{ preset_training_cycle.config.reps_per_set_small }},
+                "inol_target_small": {{ preset_training_cycle.config.inol_target_small }},
+                "intensity_target_small": {{ preset_training_cycle.config.intensity_target_small }},
+                
+                "reps_per_set_medium": {{ preset_training_cycle.config.reps_per_set_medium }},
+                "inol_target_medium": {{ preset_training_cycle.config.inol_target_medium }},
+                "intensity_target_medium": {{ preset_training_cycle.config.intensity_target_medium }},
+                
+                "reps_per_set_large": {{ preset_training_cycle.config.reps_per_set_large }},
+                "inol_target_large": {{ preset_training_cycle.config.inol_target_large }},
+                "intensity_target_large": {{ preset_training_cycle.config.intensity_target_large }},
+
+                "supramaximal_inol_increment": {{ preset_training_cycle.config.supramaximal_inol_increment }}
+            }'>
+                {{ preset_training_cycle.name }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+    <hr>
+    {% endif %}
     <form action="
     {% if training_cycle %}
         {% url 'edit' training_cycle.id %}

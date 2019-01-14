@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from .models.training_cycles import TrainingCycle, TrainingCycleConfig
+from .models.training_cycles import PresetTrainingCycle, TrainingCycle, TrainingCycleConfig
 
 from .models.training_sessions import SessionGenerator
 
@@ -121,7 +121,9 @@ def training_cycle_new(request):
         # Redirect.
         return HttpResponseRedirect(reverse('list'))
     else:
-        return render(request, 'pstd/edit.html')
+        preset_training_cycles = PresetTrainingCycle.objects.all()
+        context = {"preset_training_cycles": preset_training_cycles}
+        return render(request, 'pstd/edit.html', context)
 
 def training_cycle_list(request):
     training_cycles = TrainingCycle.objects.filter(user=request.user.pk)
