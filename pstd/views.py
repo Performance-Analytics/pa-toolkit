@@ -8,9 +8,6 @@ from .models.training_sessions import SessionGenerator
 
 # Create your views here.
 
-def index(request):
-    return HttpResponse("Hello, world. You're at PSTD index.")
-
 def session(request, training_cycle_id):
     training_cycle = TrainingCycle.objects.get(pk=training_cycle_id)
     context = {'training_cycle': training_cycle}
