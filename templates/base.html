@@ -11,7 +11,7 @@
     <div class="container-fluid">
         <header>
             {% if user.is_authenticated %}
-                <a href="/pstd/">Home</a>
+                <a href="/">Home</a>
                 |
                 Logged in as {{ user.username }}
                 |
@@ -28,9 +28,6 @@
             </div>
         </main>
         {% endif %}
-        <footer>
-            <a href="https://github.com/Performance-Analytics/pa-toolkit">GitHub</a>
-        </footer>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
