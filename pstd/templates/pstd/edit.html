@@ -189,11 +189,14 @@
         </div>
         <input type="submit" class="btn btn-primary" value="Save training cycle">
     </form>
-    <hr>
     {% if training_cycle %}
+        <hr>
         <a href="{% url 'duplicate' training_cycle.id %}">Create a copy of this training cycle</a>
         <hr>
         <a href="{% url 'delete' training_cycle.id %}">Delete this training cycle</a>
     {% endif %}
 {% endif %}
+
+<hr>
+<a href="/pstd/">Back to Training Cycles</a>
 {% endblock %}
