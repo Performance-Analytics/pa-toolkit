@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block authcontent %}
     <h1>
     {% if session %}
         Session Prescription
@@ -70,4 +70,8 @@
 
 <hr>
 <a href="/pstd/">Back to Training Cycles</a>
+{% endblock %}
+
+{% block noauthcontent %}
+<p>You are not logged in. Please log in to view this page.</p>
 {% endblock %}

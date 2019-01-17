@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block authcontent %}
     <h1>Training Cycles</h1>
     <hr>
     <a href="{% url 'new' %}">Create new training cycle</a>
@@ -34,4 +34,8 @@
     {% else %}
         <p>No training cycles have been created.</p>
     {% endif %}
+{% endblock %}
+
+{% block noauthcontent %}
+<p>You are not logged in. Please log in to view this page.</p>
 {% endblock %}

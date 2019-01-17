@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block authcontent %}
 {% if training_cycle and training_cycle.user == user or not training_cycle %}
     <h1>Configure {% if not training_cycle %}new{% endif %} training cycle</h1>
     <hr>
@@ -199,4 +199,8 @@
 
 <hr>
 <a href="/pstd/">Back to Training Cycles</a>
+{% endblock %}
+
+{% block noauthcontent %}
+<p>You are not logged in. Please log in to view this page.</p>
 {% endblock %}
