@@ -72,6 +72,17 @@
                    step="any"
                    value="{{ training_cycle.previous_training_max }}">
         </div>
+        <div class="form-group">
+            <label for="previous_large_load_training_max">Previous Low-Fatigue Training Max @ RPE 8</label>
+            <input type="number"
+                   class="form-control"
+                   name="previous_large_load_training_max"
+                   id="previous_large_load_training_max"
+                   min="0"
+                   step="any"
+                   value="{{ training_cycle.previous_large_load_training_max }}">
+        </div>
+        <hr>
         {% endif %}
         <h3>Small Load</h3>
 

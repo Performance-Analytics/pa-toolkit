@@ -8,7 +8,7 @@ class SessionGenerator(object):
                  current_training_max):
         load_size = self.determine_load_size(
             fatigue_rating,
-            training_cycle.previous_training_max,
+            training_cycle.previous_large_load_training_max,
             current_training_max
         )
         self.session = self.generate_session(training_cycle.config,
@@ -16,19 +16,21 @@ class SessionGenerator(object):
                                         current_training_max)
 
         training_cycle.previous_training_max = current_training_max
+        if fatigue_rating == "low":
+            training_cycle.previous_large_load_training_max = current_training_max
         training_cycle.save()
 
     def determine_load_size(self,
                             fatigue_rating,
-                            previous_training_max,
+                            previous_large_load_training_max,
                             current_training_max):
-        if current_training_max > previous_training_max: # TM improved.
+        if current_training_max > previous_large_load_training_max: # TM improved from last fresh session.
                 return {
                     'low': 'large',
                     'medium': 'medium',
                     'high': 'medium'
                 }[fatigue_rating]
-        else: # TM stagnated or regressed.
+        else: # TM stagnated or regressed from last fresh session.
             return {
                 'low': 'supramaximal',
                 'medium': 'medium',

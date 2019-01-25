@@ -58,6 +58,7 @@ def training_cycle_edit(request, training_cycle_id):
         if training_cycle.user == request.user:
             training_cycle.name = training_cycle_name
             training_cycle.previous_training_max = request.POST["previous_training_max"]
+            training_cycle.previous_large_load_training_max = request.POST["previous_large_load_training_max"]
 
             config = training_cycle.config
 
